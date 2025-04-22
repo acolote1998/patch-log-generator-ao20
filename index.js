@@ -24,14 +24,30 @@ export async function callGitHubApi(pullRequestLink) {
 })();
 */
 
+function gitHubPrToString(PRObject) {
+  return `
+  Titulo del pull request: ${PRObject.titulo} \n
+  Autor del pull request: ${PRObject.autor} \n
+  Descripcion del pull request: ${PRObject.descripcion} \n
+  Numero de pull request: #${PRObject.prNumber};
+  `;
+}
+
 export async function callGemini(text) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`;
-
+  const PR = await callGitHubApi(
+    "https://github.com/ao-org/argentum-online-server/pull/759"
+  );
+  let PRText = await gitHubPrToString(PR);
   // The data you want to send in the request body
   const requestBody = {
     contents: [
       {
-        parts: [{ text: `Favorite music of Argentinian musicians` }],
+        parts: [
+          {
+            text: `Dame una opinion de la siguiente PR: ${PRText}`,
+          },
+        ],
       },
     ],
   };
