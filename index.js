@@ -33,6 +33,41 @@ function gitHubPrToString(PRObject) {
   `;
 }
 
+function givePrompt(PrToString) {
+  return `
+  Meta: Quiero que la inteligencia artificial analice un Pull Request del repositorio del juego de rol argentino "Argentum Online" y, con base en la información del PR, genere una pequeña descripción para incluir en el patch log del juego.
+
+La descripción debe seguir el formato de ejemplo que te proporcionaré.
+
+Formato de la respuesta:
+
+La respuesta debe contener lo siguiente:
+
+Título: Una breve descripción del cambio realizado en el PR.
+
+Autor: Nombre del autor del PR.
+
+PR: El número del PR.
+
+Advertencias:
+
+Asegúrate de que el título sea claro y resuma el cambio de manera concisa.
+
+Verifica que el número del PR esté bien indicado.
+
+Evita hacer descripciones demasiado largas o técnicas. Deben ser fáciles de leer para cualquier usuario.
+
+Contexto adicional:
+
+Este PR es para el juego de rol argentino "Argentum Online", un juego con una comunidad activa y una base de jugadores que sigue de cerca las actualizaciones del juego. La descripción en el patch log debe ser atractiva y reflejar el cambio de forma clara.
+
+Información de PR a analizar:
+
+${PrToString}
+
+`;
+}
+
 export async function callGemini(text) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`;
   const PR = await callGitHubApi(
