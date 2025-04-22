@@ -68,6 +68,8 @@ Verifica que el número del PR esté bien indicado.
 
 Evita hacer descripciones demasiado largas o técnicas. Deben ser fáciles de leer para cualquier usuario.
 
+Evita ser muy entusiasta.
+
 Contexto adicional:
 
 Este PR es para el juego de rol argentino "Argentum Online", un juego con una comunidad activa y una base de jugadores que sigue de cerca las actualizaciones del juego. La descripción en el patch log debe ser atractiva y reflejar el cambio de forma clara.
@@ -79,11 +81,11 @@ ${PrToString}
 `;
 }
 
-export async function callGemini(text) {
+export async function callGemini(PRLink) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`;
-  const PR = await callGitHubApi(
-    "https://github.com/ao-org/argentum-online-server/pull/759"
-  );
+
+  const PR = await callGitHubApi(PRLink);
+
   let PRText = await gitHubPrToString(PR);
 
   let prompt = await givePrompt(PRText);
