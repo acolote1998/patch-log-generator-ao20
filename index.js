@@ -49,6 +49,17 @@ Autor: Nombre del autor del PR.
 
 PR: El número del PR.
 
+Ejemplo de respuesta correcta:
+"
+Mensajes de chat sobre la cabeza ahora traducidos y localizados.
+
+Autor: ReyarB
+
+¡Ahora los mensajes de chat que aparecen sobre la cabeza de los personajes se mostrarán en el idioma correcto! Disfruta de una experiencia de juego más inmersiva y con mejor traducción gracias a esta mejora.
+
+PR: #759
+"
+
 Advertencias:
 
 Asegúrate de que el título sea claro y resuma el cambio de manera concisa.
@@ -74,13 +85,15 @@ export async function callGemini(text) {
     "https://github.com/ao-org/argentum-online-server/pull/759"
   );
   let PRText = await gitHubPrToString(PR);
+
+  let prompt = await givePrompt(PRText);
   // The data you want to send in the request body
   const requestBody = {
     contents: [
       {
         parts: [
           {
-            text: `Dame una opinion de la siguiente PR: ${PRText}`,
+            text: `${prompt}`,
           },
         ],
       },
