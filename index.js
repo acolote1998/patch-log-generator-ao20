@@ -33,8 +33,9 @@ function gitHubPrToString(PRObject) {
   `;
 }
 
-function givePrompt(PrToString) {
-  return `
+function givePrompt(PrToString, language) {
+  if (language == "spanish") {
+    return `
   Meta: Quiero que la inteligencia artificial analice un Pull Request del repositorio del juego de rol argentino "Argentum Online" y, con base en la información del PR, genere una pequeña descripción para incluir en el patch log del juego.
 
 La descripción debe seguir el formato de ejemplo que te proporcionaré.
@@ -79,16 +80,62 @@ Información de PR a analizar:
 ${PrToString}
 
 `;
+  } else {
+    return `
+Goal: I want the artificial intelligence to analyze a Pull Request from the repository of the Argentine role-playing game "Argentum Online" and, based on the PR information, generate a short description to include in the game's patch log.
+
+The description should follow the example format I will provide.
+
+Response format:
+
+The response must contain the following:
+
+Title: A brief description of the change made in the PR.
+
+Author: Name of the PR's author.
+
+PR: The number of the PR.
+
+Example of a correct response:
+"
+Chat messages above characters' heads now translated and localized.
+
+Author: ReyarB
+
+Now the chat messages that appear above characters' heads will be shown in the correct language! Enjoy a more immersive and better-translated gameplay experience thanks to this improvement.
+
+PR: #759
+"
+
+Warnings:
+
+Make sure the title is clear and summarizes the change concisely.
+
+Verify that the PR number is correctly indicated.
+
+Avoid making the description too long or too technical. It should be easy to read for any user.
+
+Avoid being overly enthusiastic.
+
+Additional context:
+
+This PR is for the Argentine role-playing game "Argentum Online", a game with an active community and a player base that closely follows game updates. The description in the patch log should be engaging and clearly reflect the change.
+
+PR information to analyze:
+
+${PrToString}
+`;
+  }
 }
 
-export async function callGemini(PRLink) {
+export async function callGemini(PRLink, language) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`;
 
   const PR = await callGitHubApi(PRLink);
 
   let PRText = await gitHubPrToString(PR);
 
-  let prompt = await givePrompt(PRText);
+  let prompt = await givePrompt(PRText, language);
   // The data you want to send in the request body
   const requestBody = {
     contents: [
