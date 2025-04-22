@@ -110,7 +110,7 @@ export async function callGemini(text) {
 
   const data = await response.json();
 
-  console.log(data.candidates[0].content.parts[0].text);
+  return data.candidates[0].content.parts[0].text;
 }
 
 window.callGitHubApi = callGitHubApi;
