@@ -26,7 +26,7 @@ export async function callGemini(PRLink, language) {
   const PRText = await gitHubPrToString(PR);
 
   const prompt = await givePrompt(PRText, language);
-  // The data you want to send in the request body
+
   const requestBody = {
     contents: [
       {
@@ -47,9 +47,9 @@ export async function callGemini(PRLink, language) {
     body: JSON.stringify(requestBody), // Convert the body to a JSON string
   });
 
-  const data = await response.json();
+  const aiGeneratedData = await response.json();
 
-  return data.candidates[0].content.parts[0].text;
+  return aiGeneratedData.candidates[0].content.parts[0].text;
 }
 
 function gitHubPrToString(PRObject) {
