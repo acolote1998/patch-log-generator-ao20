@@ -161,24 +161,33 @@ ${PrToString}
 }
 
 export async function getPatchLog(language) {
+  let finalPatchLog = "";
+  let serverPatchLog = await getPatchLogPerRepo("server", language);
+  let clientPatchLog = await getPatchLogPerRepo("client", language);
+  if (language == "spanish") {
+    finalPatchLog =
+      "Servidor:\n" + serverPatchLog + "\nCliente:\n" + clientPatchLog;
+  } else {
+    finalPatchLog =
+      "Server:\n" + serverPatchLog + "\nClient:\n" + clientPatchLog;
+  }
+  return finalPatchLog;
+}
+
+export async function getPatchLogPerRepo(typeOfPatchlog, language) {
   let linkObjects = document.querySelectorAll("input");
   let linksUrls = [];
   for (let link of linkObjects) {
-    linksUrls.push(link.value);
+    if (link.value.includes(typeOfPatchlog)) {
+      linksUrls.push(link.value);
+    }
   }
   let finalPatchLog = "";
-  let serverPatchLog = "";
-  let clientPatchLog = "";
   if (linksUrls[0] != "") {
     for (let link of linksUrls) {
-      if (language == "spanish") {
-        alert("Espere por favor");
-      }
       finalPatchLog += await callGemini(link, language);
     }
     return finalPatchLog;
-  } else {
-    alert("Por favor introduzca al menos un enlace");
   }
 }
 
