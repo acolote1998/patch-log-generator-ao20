@@ -135,8 +135,7 @@ XXXXX
 Now the chat messages that appear above characters' heads will be shown in the correct language! Enjoy a more immersive and better-translated gameplay experience thanks to this improvement.
 XXXXX
 PR: #759
-XXXXX
--"
+XXXXX"
 
 Warnings:
 
