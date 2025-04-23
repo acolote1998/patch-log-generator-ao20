@@ -169,10 +169,17 @@ export async function getPatchLog(language) {
   let finalPatchLog = "";
   let serverPatchLog = "";
   let clientPatchLog = "";
-  for (let link of linksUrls) {
-    finalPatchLog += await callGemini(link, language);
+  if (linksUrls[0] != "") {
+    for (let link of linksUrls) {
+      if (language == "spanish") {
+        alert("Espere por favor");
+      }
+      finalPatchLog += await callGemini(link, language);
+    }
+    return finalPatchLog;
+  } else {
+    alert("Por favor introduzca al menos un enlace");
   }
-  return finalPatchLog;
 }
 
 export async function patchToTextAreas() {
