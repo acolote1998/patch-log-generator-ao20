@@ -174,5 +174,5 @@ export async function callGemini(PRLink, language) {
   return data.candidates[0].content.parts[0].text;
 }
 
-window.callGitHubApi = callGitHubApi;
-window.callGemini = callGemini;
+window.callGitHubApi = await callGitHubApi;
+window.callGemini = await callGemini;
