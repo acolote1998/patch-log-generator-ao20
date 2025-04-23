@@ -258,7 +258,7 @@ export function copyEnglishText() {
 }
 
 function securityCheck() {
-  if (prompt("Password") == "ao20") {
+  if (prompt("Password") == "ao20password") {
     document.querySelector("body").classList.remove("hiddensecurity");
   }
 }
