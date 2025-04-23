@@ -18,7 +18,7 @@ export async function getPatchLog() {
   let serverPatchLog = "";
   let clientPatchLog = "";
   for (let link of linksUrls) {
-    finalPatchLog += (await callGemini(link, "spanish")) + `\n - \n`;
+    finalPatchLog += (await callGemini(link, "english")) + `\n - \n`;
   }
   return finalPatchLog;
 }
