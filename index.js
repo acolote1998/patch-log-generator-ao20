@@ -64,17 +64,19 @@ Autor: Nombre del autor del PR.
 PR: El número del PR.
 
 Ejemplo de respuesta correcta:
-"
+"XXXXX
 Mensajes de chat sobre la cabeza ahora traducidos y localizados.
-
+XXXXX
 Autor: ReyarB
-
+XXXXX
 ¡Ahora los mensajes de chat que aparecen sobre la cabeza de los personajes se mostrarán en el idioma correcto! Disfruta de una experiencia de juego más inmersiva y con mejor traducción gracias a esta mejora.
-
+XXXXX
 PR: #759
-"
+XXXXX"
 
 Advertencias:
+
+Asegurate de que las XXXXX se conserven en la respuesta generada
 
 Asegúrate de que el título sea claro y resuma el cambio de manera concisa.
 
@@ -110,17 +112,20 @@ Author: Name of the PR's author.
 PR: The number of the PR.
 
 Example of a correct response:
-"
+"XXXXX
 Chat messages above characters' heads now translated and localized.
-
+XXXXX
 Author: ReyarB
-
+XXXXX
 Now the chat messages that appear above characters' heads will be shown in the correct language! Enjoy a more immersive and better-translated gameplay experience thanks to this improvement.
-
+XXXXX
 PR: #759
-"
+XXXXX
+-"
 
 Warnings:
+
+Make sure the XXXXX are kept in the generated response
 
 Make sure the title is clear and summarizes the change concisely.
 

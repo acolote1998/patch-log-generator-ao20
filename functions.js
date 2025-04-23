@@ -18,17 +18,25 @@ export async function getPatchLog(language) {
   let serverPatchLog = "";
   let clientPatchLog = "";
   for (let link of linksUrls) {
-    finalPatchLog += (await callGemini(link, language)) + `\n - \n`;
+    finalPatchLog += await callGemini(link, language);
   }
   return finalPatchLog;
 }
 
 export async function patchToTextAreas() {
   let textAreaSpanish = document.getElementById("spanishPatchLog");
-  textAreaSpanish.innerText = await getPatchLog("spanish");
+  let spanishText = await getPatchLog("spanish");
+  spanishText = spanishText.replaceAll("`", "").split("XXXXX");
+  for (let string of spanishText) {
+    textAreaSpanish.value = textAreaSpanish.value + string;
+  }
 
   let textAreaEnglish = document.getElementById("englishPatchLog");
-  textAreaEnglish.innerText = await getPatchLog("english");
+  let englishText = await getPatchLog("english");
+  englishText = englishText.replaceAll("`", "").split("XXXXX");
+  for (let string of englishText) {
+    textAreaEnglish.value = textAreaEnglish.value + string;
+  }
 }
 
 window.getPatchLog = getPatchLog;
