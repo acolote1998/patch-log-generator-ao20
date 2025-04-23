@@ -165,12 +165,25 @@ export async function getPatchLog(language) {
   let serverPatchLog = await getPatchLogPerRepo("server", language);
   let clientPatchLog = await getPatchLogPerRepo("client", language);
   if (language == "spanish") {
-    finalPatchLog =
-      "Servidor:\n" + serverPatchLog + "\nCliente:\n" + clientPatchLog;
+    if (serverPatchLog != "" && clientPatchLog != "") {
+      finalPatchLog =
+        "Servidor:\n" + serverPatchLog + "\nCliente:\n" + clientPatchLog;
+    } else if (serverPatchLog != "") {
+      finalPatchLog = "Servidor:\n" + serverPatchLog;
+    } else {
+      finalPatchLog = "Cliente:\n" + clientPatchLog;
+    }
   } else {
-    finalPatchLog =
-      "Server:\n" + serverPatchLog + "\nClient:\n" + clientPatchLog;
+    if (serverPatchLog != "" && clientPatchLog != "") {
+      finalPatchLog =
+        "Server:\n" + serverPatchLog + "\nClient:\n" + clientPatchLog;
+    } else if (serverPatchLog != "") {
+      finalPatchLog = "Server:\n" + serverPatchLog;
+    } else {
+      finalPatchLog = "Client:\n" + clientPatchLog;
+    }
   }
+
   return finalPatchLog;
 }
 export async function getPatchLogPerRepo(typeOfPatchlog, language) {
