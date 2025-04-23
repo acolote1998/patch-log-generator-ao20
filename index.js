@@ -202,5 +202,25 @@ export function addMoreInputs() {
   inputDivs.appendChild(newInput);
 }
 
+export function copyEspanolText() {
+  const textArea = document.getElementById("spanishPatchLog");
+  textArea.select();
+  navigator.clipboard
+    .writeText(textArea.value)
+    .then(() => alert("PatchLog Copiado"))
+    .catch((err) => console.error("Failed to copy", err));
+}
+
+export function copyEnglishText() {
+  const textArea = document.getElementById("englishPatchLog");
+  textArea.select();
+  navigator.clipboard
+    .writeText(textArea.value)
+    .then(() => alert("PatchLog Copiado"))
+    .catch((err) => console.error("Failed to copy", err));
+}
+
 window.addMoreInputs = addMoreInputs;
 window.patchToTextAreas = patchToTextAreas;
+window.copyEspanolText = copyEspanolText;
+window.copyEnglishText = copyEnglishText;
