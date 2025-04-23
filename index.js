@@ -161,16 +161,6 @@ ${PrToString}
   }
 }
 
-export function addMoreInputs() {
-  let inputDivs = document.getElementById("inputs");
-  let newInput = document.createElement("input");
-  let newBr = document.createElement("br");
-
-  newInput.type = "text";
-  inputDivs.appendChild(newBr);
-  inputDivs.appendChild(newInput);
-}
-
 export async function getPatchLog(language) {
   let linkObjects = document.querySelectorAll("input");
   let linksUrls = [];
@@ -202,9 +192,15 @@ export async function patchToTextAreas() {
   }
 }
 
-window.getPatchLog = getPatchLog;
+export function addMoreInputs() {
+  let inputDivs = document.getElementById("inputs");
+  let newInput = document.createElement("input");
+  let newBr = document.createElement("br");
+
+  newInput.type = "text";
+  inputDivs.appendChild(newBr);
+  inputDivs.appendChild(newInput);
+}
+
 window.addMoreInputs = addMoreInputs;
 window.patchToTextAreas = patchToTextAreas;
-
-window.callGitHubApi = await callGitHubApi;
-window.callGemini = await callGemini;
