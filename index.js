@@ -206,6 +206,7 @@ export async function getPatchLogPerRepo(typeOfPatchlog, language) {
 export async function patchToTextAreas() {
   let linkObjects = document.querySelectorAll("input");
   if (linkObjects[0].value != "") {
+    alert("Por favor espere");
     let textAreaSpanish = document.getElementById("spanishPatchLog");
     let spanishText = await getPatchLog("spanish");
     spanishText = spanishText.replaceAll("`", "").split("XXXXX");
