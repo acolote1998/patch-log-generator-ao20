@@ -237,20 +237,24 @@ export function addMoreInputs() {
 
 export function copyEspanolText() {
   const textArea = document.getElementById("spanishPatchLog");
-  textArea.select();
-  navigator.clipboard
-    .writeText(textArea.value)
-    .then(() => alert("PatchLog Copiado"))
-    .catch((err) => console.error("Failed to copy", err));
+  if (textArea.value != "") {
+    textArea.select();
+    navigator.clipboard
+      .writeText(textArea.value)
+      .then(() => alert("PatchLog Copiado"))
+      .catch((err) => console.error("Failed to copy", err));
+  }
 }
 
 export function copyEnglishText() {
   const textArea = document.getElementById("englishPatchLog");
-  textArea.select();
-  navigator.clipboard
-    .writeText(textArea.value)
-    .then(() => alert("PatchLog Copiado"))
-    .catch((err) => console.error("Failed to copy", err));
+  if (textArea.value != "") {
+    textArea.select();
+    navigator.clipboard
+      .writeText(textArea.value)
+      .then(() => alert("PatchLog Copiado"))
+      .catch((err) => console.error("Failed to copy", err));
+  }
 }
 
 function securityCheck() {
