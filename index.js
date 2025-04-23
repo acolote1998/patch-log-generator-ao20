@@ -18,6 +18,40 @@ export async function callGitHubApi(pullRequestLink) {
   };
 }
 
+export async function callGemini(PRLink, language) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`;
+
+  const PR = await callGitHubApi(PRLink);
+
+  const PRText = await gitHubPrToString(PR);
+
+  const prompt = await givePrompt(PRText, language);
+  // The data you want to send in the request body
+  const requestBody = {
+    contents: [
+      {
+        parts: [
+          {
+            text: `${prompt}`,
+          },
+        ],
+      },
+    ],
+  };
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json", // Set the content type to JSON
+    },
+    body: JSON.stringify(requestBody), // Convert the body to a JSON string
+  });
+
+  const data = await response.json();
+
+  return data.candidates[0].content.parts[0].text;
+}
+
 function gitHubPrToString(PRObject) {
   return `
   Titulo del pull request: ${PRObject.titulo} \n
@@ -125,40 +159,6 @@ PR information to analyze:
 ${PrToString}
 `;
   }
-}
-
-export async function callGemini(PRLink, language) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`;
-
-  const PR = await callGitHubApi(PRLink);
-
-  let PRText = await gitHubPrToString(PR);
-
-  let prompt = await givePrompt(PRText, language);
-  // The data you want to send in the request body
-  const requestBody = {
-    contents: [
-      {
-        parts: [
-          {
-            text: `${prompt}`,
-          },
-        ],
-      },
-    ],
-  };
-
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json", // Set the content type to JSON
-    },
-    body: JSON.stringify(requestBody), // Convert the body to a JSON string
-  });
-
-  const data = await response.json();
-
-  return data.candidates[0].content.parts[0].text;
 }
 
 export function addMoreInputs() {
