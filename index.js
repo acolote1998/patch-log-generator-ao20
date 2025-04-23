@@ -173,7 +173,6 @@ export async function getPatchLog(language) {
   }
   return finalPatchLog;
 }
-
 export async function getPatchLogPerRepo(typeOfPatchlog, language) {
   let linkObjects = document.querySelectorAll("input");
   let linksUrls = [];
@@ -192,18 +191,23 @@ export async function getPatchLogPerRepo(typeOfPatchlog, language) {
 }
 
 export async function patchToTextAreas() {
-  let textAreaSpanish = document.getElementById("spanishPatchLog");
-  let spanishText = await getPatchLog("spanish");
-  spanishText = spanishText.replaceAll("`", "").split("XXXXX");
-  for (let string of spanishText) {
-    textAreaSpanish.value = textAreaSpanish.value + string;
-  }
+  let linkObjects = document.querySelectorAll("input");
+  if (linkObjects[0].value != "") {
+    let textAreaSpanish = document.getElementById("spanishPatchLog");
+    let spanishText = await getPatchLog("spanish");
+    spanishText = spanishText.replaceAll("`", "").split("XXXXX");
+    for (let string of spanishText) {
+      textAreaSpanish.value = textAreaSpanish.value + string;
+    }
 
-  let textAreaEnglish = document.getElementById("englishPatchLog");
-  let englishText = await getPatchLog("english");
-  englishText = englishText.replaceAll("`", "").split("XXXXX");
-  for (let string of englishText) {
-    textAreaEnglish.value = textAreaEnglish.value + string;
+    let textAreaEnglish = document.getElementById("englishPatchLog");
+    let englishText = await getPatchLog("english");
+    englishText = englishText.replaceAll("`", "").split("XXXXX");
+    for (let string of englishText) {
+      textAreaEnglish.value = textAreaEnglish.value + string;
+    }
+  } else {
+    alert("Por favor introduzca al menos un enlace");
   }
 }
 
