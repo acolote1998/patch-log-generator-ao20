@@ -6,9 +6,21 @@ export async function callGitHubApi(pullRequestLink) {
     "https://api.github.com/repos/"
   );
   modifiedString = modifiedString.replace("pull", "pulls");
-  let pullRequest;
+
   const response = await fetch(modifiedString);
+
+  if (!response.ok) {
+    throw new Error(
+      `GitHub API error: ${response.status} ${response.statusText}`
+    );
+  }
+
   const data = await response.json();
+
+  if (!data.user) {
+    throw new Error(`Unexpected API response: ${JSON.stringify(data)}`);
+  }
+
   return {
     titulo: data.title,
     autor: data.user.login,
