@@ -26,6 +26,7 @@ export async function callGitHubApi(pullRequestLink) {
     autor: data.user.login,
     descripcion: data.body,
     prNumber: data.number,
+    repo: data.head.repo.name,
   };
 }
 
