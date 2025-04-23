@@ -1,0 +1,36 @@
+h2 {
+  text-align: center;
+}
+
+.mainCard {
+  display: grid;
+  justify-items: center;
+}
+
+.inputsClass {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputsClass input {
+  display: grid;
+  width: 300%;
+}
+
+.textContainer {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-items: center;
+}
+
+.moreInputs {
+  display: flex;
+  background-color: black;
+  color: wheat;
+  justify-content: space-around;
+  width: 50%;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 10px;
+}

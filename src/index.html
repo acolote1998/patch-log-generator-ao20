@@ -7,37 +7,21 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div>
-      <h2>Por favor ingrese los links de las PRs del parche</h2>
-      <br />
-      <div id="inputs">
+    <div class="mainCard">
+      <h2>Ingresar enlaces de los PRs</h2>
+      <div class="inputsClass" id="inputs">
         <input type="text" />
       </div>
-      <span onclick="addMoreInputs()">Agregar Mas</span>
+      <span class="moreInputs" onclick="addMoreInputs()">+</span>
     </div>
-    <div
-      style="
-        display: grid;
-        grid-template-columns: 50% 50%;
-        justify-content: center;
-        align-content: center;
-        text-align: center;
-      "
-    >
+    <div class="textContainer">
       <div>
         <h2>Espanol</h2>
-        <textarea
-          style="height: 500px; width: 400px"
-          id="spanishPatchLog"
-        ></textarea>
+        <textarea id="spanishPatchLog"></textarea>
       </div>
-
       <div>
         <h2>Ingles</h2>
-        <textarea
-          style="height: 500px; width: 400px"
-          id="englishPatchLog"
-        ></textarea>
+        <textarea id="englishPatchLog"></textarea>
       </div>
     </div>
     <script type="module" src="../index.js"></script>
