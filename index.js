@@ -1,25 +1,13 @@
 import geminiKey from "./key.js";
 
 export async function callGitHubApi(pullRequestLink) {
-  let modifiedString = pullRequestLink.replace(
-    "https://github.com/",
-    "https://api.github.com/repos/"
-  );
-  modifiedString = modifiedString.replace("pull", "pulls");
+  const modifiedString = pullRequestLink
+    .replace("https://github.com/", "https://api.github.com/repos/")
+    .replace("pull", "pulls");
 
   const response = await fetch(modifiedString);
 
-  if (!response.ok) {
-    throw new Error(
-      `GitHub API error: ${response.status} ${response.statusText}`
-    );
-  }
-
   const data = await response.json();
-
-  if (!data.user) {
-    throw new Error(`Unexpected API response: ${JSON.stringify(data)}`);
-  }
 
   return {
     titulo: data.title,
@@ -29,13 +17,6 @@ export async function callGitHubApi(pullRequestLink) {
     repo: data.head.repo.name,
   };
 }
-
-/*
-(async () => {
-  const prData = await callGitHubApi('https://github.com/ao-org/argentum-online-server/pull/759');
-  console.log(prData);
-})();
-*/
 
 function gitHubPrToString(PRObject) {
   return `
