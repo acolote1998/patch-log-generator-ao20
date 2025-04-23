@@ -253,7 +253,14 @@ export function copyEnglishText() {
     .catch((err) => console.error("Failed to copy", err));
 }
 
+function securityCheck() {
+  if (prompt("Password") == "ao20") {
+    document.querySelector("body").classList.remove("hiddensecurity");
+  }
+}
+
 window.addMoreInputs = addMoreInputs;
 window.patchToTextAreas = patchToTextAreas;
 window.copyEspanolText = copyEspanolText;
 window.copyEnglishText = copyEnglishText;
+window.securityCheck = securityCheck;
